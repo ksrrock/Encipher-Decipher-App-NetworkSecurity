@@ -1,20 +1,30 @@
 from flask import Flask,render_template,request,redirect
 app=Flask(__name__)
 
-key="#1562789909112"
+
 def encode(message):
-    pass
+    s=[]
+    for i in message:
+        key=26-(ord(i)-ord('a'))+ord('a')
+        s.append(chr(key))
+    
+    return ''.join(s)
 
 
 def decode(message):
-    pass
+    s=[]
+    for i in message:
+        key=26-(ord(i)-ord('a'))+ord('a')
+        s.append(chr(key))
+    
+    return ''.join(s)
 
 
 @app.route('/',methods=["GET","POST"])
 def encrypt():
     if request.method=="POST":
         message=request.form['plaintext']
-        return render_template("index.html",message=message)
+        return render_template("index.html",message=decode(message))
     else:
         return render_template("index.html")
 
@@ -23,7 +33,7 @@ def encrypt():
 def decrypt():
     decipher=request.form['decipher']
     print("d",decipher)
-    return render_template("index.html",decipher=decipher)
+    return render_template("index.html",decipher=decode(decipher))
 
     
 if __name__=="__main__":
