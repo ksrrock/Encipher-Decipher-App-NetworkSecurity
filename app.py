@@ -4,17 +4,19 @@ app=Flask(__name__)
 
 def encode(message):
     s=[]
+    print(message)
     for i in message:
-        key=26-(ord(i)-ord('a'))+ord('a')
+        key=25-(ord(i)-ord('a'))+ord('a')
+        print(key)
         s.append(chr(key))
-    
+    print(s)
     return ''.join(s)
 
 
 def decode(message):
     s=[]
     for i in message:
-        key=26-(ord(i)-ord('a'))+ord('a')
+        key=25-(ord(i)-ord('a'))+ord('a')
         s.append(chr(key))
     
     return ''.join(s)
@@ -24,7 +26,8 @@ def decode(message):
 def encrypt():
     if request.method=="POST":
         message=request.form['plaintext']
-        return render_template("index.html",message=decode(message))
+        print(message)
+        return render_template("index.html",message=encode(message))
     else:
         return render_template("index.html")
 
